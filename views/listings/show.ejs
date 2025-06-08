@@ -1,0 +1,27 @@
+
+<% layout('/layouts/boilerplate') %>
+<body class="bg-light">
+  <div class="container py-5">
+    <div class="card shadow-lg mx-auto " style="max-width: 37.5rem;">
+      <img src="<%= listings.image.url %>" class="card-img-top  p-2" alt="Listing Image" style="object-fit: cover; height: 18.75rem;">
+      <div class="card-body">
+        <h1 class="card-title mb-3  p-2"><%= listings.title %></h1>
+        <h5 class="card-text text-muted mb-3  p-2"><%= listings.description %></h5>
+        <ul class="list-group list-group-flush mb-3 ">
+          <li class="list-group-item"><strong>Price:</strong> $<%= listings.price %></li>
+          <li class="list-group-item"><strong>Location:</strong> <%= listings.location %></li>
+          <li class="list-group-item"><strong>Country:</strong> <%= listings.country %></li>
+        </ul>
+        <div class="d-flex p-2 gap-2">
+          <form method="GET" action="/listings/<%=listings._id%>/edit">
+            <button class="btn btn-primary">Edit this listing</button>
+          </form>
+          <form method="POST" action="/listings/<%= listings._id %>?_method=DELETE">
+  <button type="submit" class="btn btn-danger">Delete this listing</button>
+</form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
