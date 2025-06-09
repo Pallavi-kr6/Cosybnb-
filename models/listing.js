@@ -1,12 +1,12 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-//title , description , image,price , location , country
-const ListingSchema = new Schema({
- title : {
-    type: String,
+
+const listingSchema = new Schema({
+ title:{
+    type:String,
     required:true,
  },
- description: String,
+ description:String,
  image: {
   filename: String,
   url: {
@@ -15,27 +15,34 @@ const ListingSchema = new Schema({
       v === ""
         ? "https://unsplash.com/photos/low-angle-photography-of-high-rise-building-pPxhM0CRzl4"
         : v,
-  }
+  },
 },
-
- price:{
-    type:Number,
-    required:true,
- },
- location:{
-    type:String,
-    required:true,
- },
-    country:{
+    price:{
+        type:Number,
+        required:true,
+    },
+    location:{
         type:String,
         required:true,
     },
+  country:{
+    type:String,
+    required:true,
+  },
+  reviews :[
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Review"
+    }
+  ]
+});
 
+listingSchema.post("findOneAndDelete", async function (listing) {
+  if (listing) { 
+    await Review.deleteMany({ _id: { $in: listing.reviews } }); 
+  } 
+});
 
-})
+const listing = mongoose.model("listing",listingSchema);
 
-const Listing = mongoose.model("Listing",ListingSchema);
-
-
-
-module.exports = Listing;
+module.exports = listing;

@@ -1,78 +1,42 @@
 <% layout('/layouts/boilerplate') %>
 <body>
-  <form method="POST" action="/listings" class="needs-validation" novalidate>
-    <div class="row" >
+<form method="POST" action="/listings" class="needs-validation" novalidate>
+  <div class="row">
     <div class="col-8 offset-2">
       <h1 class="text-center">Create New Listing</h1>
-    <div class="mb-3">
-      <label for="title" class="form-label">Enter The Title</label>
-    <input name="title" type="text" placeholder="Title"   class="form-control" required />
-     <div class="invalid-feedback">
-         Enter The Correct Title.
+
+      <div class="mb-3">
+        <label for="title" class="form-label">Enter The Title</label>
+        <input name="listing[title]" type="text" placeholder="Title" class="form-control" required />
       </div>
-       <div class="valid-feedback">
-      Looks Good!
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Enter The Description</label>
+        <textarea name="listing[description]" placeholder="Description" class="form-control" required></textarea>
       </div>
+
+      <div class="mb-3">
+        <label for="price" class="form-label">Enter The Price</label>
+        <input name="listing[price]" type="number" placeholder="Price" class="form-control" required />
+      </div>
+
+      <div class="mb-3">
+        <label for="country" class="form-label">Enter The Country</label>
+        <input name="listing[country]" type="text" placeholder="Country" class="form-control" required />
+      </div>
+
+      <div class="mb-3">
+        <label for="location" class="form-label">Enter The Location</label>
+        <input name="listing[location]" type="text" placeholder="Location" class="form-control" required />
+      </div>
+
+      <div class="mb-3">
+        <label for="img" class="form-label">Provide Image URL</label>
+        <input name="listing[image][url]" type="text" placeholder="URL" class="form-control" />
+      </div>
+
+      <button type="submit" class="btn btn-primary">Create Listing</button>
     </div>
-    
-    <div class="mb-3">
-     <label for="description" class="form-label">Enter The Description</label>
-    <textarea name="description" placeholder="Description"  class="form-control" required></textarea>
-    <div class="invalid-feedback">
-        Give a short Description.
-      </div>
-       <div class="valid-feedback">
-      Looks Good!
-      </div>
-    </div>
-    
-    
-     <div class="mb-3">
-     <label for="price" class="form-label col-md-4 col-4">Enter The Price</label>
-    <input name="price" type="number" placeholder="Price"  class="form-control" required />
-    <div class="invalid-feedback">
-         Enter Valid Price.
-      </div>
-       <div class="valid-feedback">
-      Looks Good!
-      </div>
-    </div>
-    
-   <div>
-     <label for="country" class="form-label col-md-8 ">Enter The Country</label>
-    <input name="country" type="text" placeholder="Country"  class="form-control" required />
-    <div class="invalid-feedback">
-         Enter The Country.
-      </div>
-       <div class="valid-feedback">
-      Looks Good!
-      </div>
-    </div class="mb-3">
-    
-     <div>
-     <label for="location" class="form-label">Enter The Location</label>
-    <input name="location" type="text" placeholder="Location"  class="form-control" required />
-    <div class="invalid-feedback">
-         Enter Location.
-      </div>
-       <div class="valid-feedback">
-      Looks Good!
-      </div>
-    
-</div>
- <div class="mb-3">
-     <label for="img" class="form-label">Provide Image URL</label>
-    <input name="img" type="text" placeholder="URL" class="form-control"  />
-    <div class="invalid-feedback">
-          Enter Valid Image URL.
-      </div>
-       <div class="valid-feedback">
-      Looks Good!
-      </div>
-    
-</div>
-    <button type="submit" class="btn btn-primary">Create Listing</button>
-  </form>
   </div>
-  </div>
+</form>
 </body>

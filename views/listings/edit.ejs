@@ -7,34 +7,34 @@
       <h1 class="text-center">Edit Listing</h1>
       <div class="mb-3">
       <label for="title" class="form-label">Title</label>
-      <input id="title" name="title" type="text" class="form-control" placeholder="Title" value="<%=listing.title  %>" required />
+      <input id="title" name="listing[title]" type="text" class="form-control" placeholder="Title" value="<%=listing.title  %>" required />
       </div>
 
       <div class="mb-3">
       <label for="description" class="form-label">Description</label>
-      <textarea id="description" name="description" class="form-control" placeholder="Description" required><%=listing.description  %></textarea>
+      <textarea id="description" name="listing[description]" class="form-control" placeholder="Description" required><%=listing.description  %></textarea>
       </div>
    
       <div class="mb-3">
       <label for="price" class="form-label">Price</label>
-      <input id="price" name="price" type="number" class="form-control" placeholder="Price" value="<%=listing.price  %>" required />
+      <input id="price" name="listing[price]" type="number" class="form-control" placeholder="Price" value="<%=listing.price  %>" required />
       </div>
 
       <div class="mb-3">
       <label for="country" class="form-label">Country</label>
-      <input id="country" name="country" type="text" class="form-control" placeholder="Country" value="<%=listing.country %>" required />
+      <input id="country" name="listing[country]" type="text" class="form-control" placeholder="Country" value="<%=listing.country %>" required />
       </div>
 
       <div class="mb-3">
       <label for="location" class="form-label">Location</label>
-      <input id="location" name="location" type="text" class="form-control" placeholder="Location" value="<%=listing.location  %>" required />
+      <input id="location" name="listing[location]" type="text" class="form-control" placeholder="Location" value="<%=listing.location  %>" required />
       </div>
 
-       <div class="mb-3">
-     <label for="img" class="form-label"> Image URL</label>
-    <input name="img" type="text" placeholder="URL" class="form-control"  required />
-    
+      <div class="mb-3">
+  <label for="image-url" class="form-label">Image URL</label>
+  <input id="image-url" name="listing[image][url]" type="text" placeholder="URL" value="<%= listing.image.url %>" class="form-control" required />
 </div>
+
 
       <button type="submit" class="btn btn-secondary">Edit</button>
     </div>
