@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const Review = require("../models/review.js");
+
 
 const listingSchema = new Schema({
  title:{
@@ -13,7 +15,7 @@ const listingSchema = new Schema({
     type: String,
     set: (v) =>
       v === ""
-        ? "https://unsplash.com/photos/low-angle-photography-of-high-rise-building-pPxhM0CRzl4"
+        ? "https://plus.unsplash.com/premium_photo-1748960861503-99b1f5412a81?q=80&w=1970&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         : v,
   },
 },

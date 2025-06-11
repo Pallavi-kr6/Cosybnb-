@@ -6,6 +6,7 @@ const wrapAsync = require('../utils/wrapAsync.js');
 const ExpressError = require('../utils/ExpressError.js');
 const { reviewSchema } = require('../schema.js');
 
+
 const validateReview = (req, res, next) => {
   console.log("REQ.BODY inside validateReview:", req.body); // Log here
   const { error } = reviewSchema.validate(req.body);
