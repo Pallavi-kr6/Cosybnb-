@@ -13,6 +13,12 @@ app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 app.use(express.json()); // Parse JSON bodies
 const session = require('express-session');
 const flash = require("connect-flash");
+const passport = require("passport");
+const localStrategy = require("passport-local");
+const User = require("./models/user.js");
+
+
+
 //requiring express sessions
 const sessionOptions = {
     secret :"mysupersecretcode",
@@ -28,9 +34,15 @@ const sessionOptions = {
 
 app.use(session(sessionOptions));
 app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new localStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.serializeUser());
 
-const listings = require("./routes/listing.js")
-const reviews = require("./routes/review.js")
+const listingRouter = require("./routes/listing.js");
+const reviewRouter= require("./routes/review.js");
+const userRouter= require("./routes/user.js");
 main()
 .then(()=>{
     console.log("connected to mongodb");
@@ -58,8 +70,9 @@ app.use((req,res,next)=>{
     next();
 })
 
-app.use("/listings",listings);
-app.use("/listings/:id/reviews",reviews)
+app.use("/listings",listingRouter);
+app.use("/listings/:id/reviews",reviewRouter)
+app.use("/",userRouter);
 
 
 

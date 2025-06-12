@@ -1,0 +1,47 @@
+<% layout('/layouts/boilerplate') %>
+
+<div class="row justify-content-center align-items-center min-vh-100" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-body p-5">
+                <div class="text-center mb-4">
+                    <img src="https://img.icons8.com/color/96/000000/beach.png" alt="Travel Icon" style="width:64px;">
+                    <h2 class="fw-bold mt-3" style="color: #2d6a4f;">Login</h2>
+                    <p class="text-muted">Join the adventure. Discover your next destination!</p>
+                </div>
+                <form action="/login" method="POST" class="needs-validation" novalidate>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input
+                            name="username"
+                            id="username"
+                            type="text"
+                            class="form-control"
+                            required
+                            placeholder="Enter your username"
+                        />
+                        <div class="valid-feedback">Looks good!</div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="password" class="form-label">Password</label>
+                        <input
+                            name="password"
+                            id="password"
+                            type="password"
+                            class="form-control"
+                            required
+                            placeholder="Create a password"
+                        />
+                        <div class="valid-feedback">Looks good!</div>
+                    </div>
+                    <button class="btn btn-success w-100 py-2 fw-bold" style="background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%); border: none;">
+                        Sign Up
+                    </button>
+                </form>
+                <div class="text-center mt-4">
+                    <small class="text-muted">Already have an account? <a href="/login" class="text-success">Log in</a></small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
