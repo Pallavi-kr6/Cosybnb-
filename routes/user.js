@@ -38,9 +38,19 @@ failureRedirect: "/login",
 failureFlash: true, 
 }), 
 async (req, res) => { 
-req.flash("success", "Welcome back to Wanderlust!"); 
-res.redirect("/"); 
+req.flash("success","Welcome Back To Cosybnb");
+res.redirect("/");
 } 
 );
+
+router.get("/logout",(req,res,next)=>{
+    req.logout((err)=>{
+        if(err){
+            return next(err);
+        }
+        req.flash("success","You have logged out");
+        res.redirect("/");
+    })
+})
 
 module.exports=router;

@@ -38,7 +38,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser()); 
 
 const listingRouter = require("./routes/listing.js");
 const reviewRouter= require("./routes/review.js");
@@ -58,22 +58,31 @@ async function main(){
 
 
 //NEED TO DISPLAY EVERYTHING , CLICK ON IT SO IT SHOWS THE PARTICULAR THING , CREATE NEW , EDIT , DELETE
+// SESSION AND FLASH SETUP
+app.use(session(sessionOptions));
+app.use(flash());
 
-//DISPLAY ALL LISTINGS
+// Passport setup
+app.use(passport.initialize());
+app.use(passport.session());
+
+// ✅ Set flash messages and current user (optional)
+app.use((req, res, next) => {
+    res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
+    res.locals.currentUser = req.user; // optional for navbar logic
+    next();
+});
+
+// ✅ All routes go below this line
+app.use("/", userRouter);
+app.use("/listings", listingRouter);
+app.use("/listings/:id/reviews", reviewRouter);
+
+// Home route
 app.get("/", (req, res) => {
     res.redirect("/listings");
 });
-
-app.use((req,res,next)=>{
-    res.locals.success=req.flash("success");
-    res.locals.error = req.flash("error");
-    next();
-})
-
-app.use("/listings",listingRouter);
-app.use("/listings/:id/reviews",reviewRouter)
-app.use("/",userRouter);
-
 
 
 
