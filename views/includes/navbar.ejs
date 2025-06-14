@@ -24,4 +24,13 @@
       </li>
     </ul>
   </div>
+  <div class="navbar-nav">
+    <% if(!currentUser) {%>
+    <a class="nav-link" href="/signup" >Sign up</a>
+    <a class="nav-link" href="/login">log in</a>
+    <%}%>
+    <% if(currentUser) {%>
+    <a class="nav-link" href="/logout">Log out</a>
+    <%}%>
+  </div>
 </nav>
