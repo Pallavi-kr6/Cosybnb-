@@ -1,3 +1,9 @@
+
+if(process.env.NODE_ENV!="production"){
+require('dotenv').config()
+}
+
+
 const mongoose = require("mongoose");
 const path = require("path");
 const express = require("express");
@@ -16,7 +22,8 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const localStrategy = require("passport-local");
 const User = require("./models/user.js");
-
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
 
 
 //requiring express sessions
