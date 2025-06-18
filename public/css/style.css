@@ -69,3 +69,9 @@
     text-decoration: none;
 
 }
+
+#map{
+    border: 200px;
+    height: 250px;
+    width: 550px;
+}

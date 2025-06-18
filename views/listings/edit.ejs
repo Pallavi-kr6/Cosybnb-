@@ -1,7 +1,7 @@
 <% layout('/layouts/boilerplate') %>
 
 <body>
-  <form method="POST" action="/listings/<%=listing._id %>?_method=PUT">
+  <form method="POST" action="/listings/<%=listing._id %>?_method=PUT" enctype="multipart/form-data">
     <div class="row">
     <div class="col-8 offset-2">
       <h1 class="text-center">Edit Listing</h1>
@@ -9,6 +9,10 @@
       <label for="title" class="form-label">Title</label>
       <input id="title" name="listing[title]" type="text" class="form-control" placeholder="Title" value="<%=listing.title  %>" required />
       </div>
+      
+       <div class="mb-3">
+        <img src="<%= listing.image.url %>" style="width: 200px; height: 150px;">
+       </div>
 
       <div class="mb-3">
       <label for="description" class="form-label">Description</label>
@@ -30,10 +34,11 @@
       <input id="location" name="listing[location]" type="text" class="form-control" placeholder="Location" value="<%=listing.location  %>" required />
       </div>
 
-      <div class="mb-3">
-  <label for="image-url" class="form-label">Image URL</label>
-  <input id="image-url" name="listing[image][url]" type="text" placeholder="URL" value="<%= listing.image.url %>" class="form-control" required />
-</div>
+
+     <div class="mb-3">
+        <label for="img" class="form-label">Upload Image</label>
+        <input name="listing[image]" type="file" placeholder="URL" class="form-control" required/>
+      </div>
 
 
       <button type="submit" class="btn btn-secondary">Edit</button>

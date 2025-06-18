@@ -1,5 +1,8 @@
 
 <% layout('/layouts/boilerplate') %>
+<script>
+   const mapToken = "<%=process.env.MAP_TOKEN %>";
+</script>
 <body class="bg-light">
   <div class="container py-5">
     <div class="card shadow-lg mx-auto listing-card " style="max-width: 37.5rem; ">
@@ -56,7 +59,8 @@
         </form>
      <% } %>
       </div>
-      <hr>
+     
+      <% if(listing.reviews.length>0)  { %>
       <p class="p-3"><b>All Reviews</b></p>
       <div class="row">
      <% for (let review of listing.reviews) { %>
@@ -78,8 +82,17 @@
  <% }%>
   </div>
 <% } %>
+<% } %>
+ <div class="card shadow-lg mx-auto listing-card " >
+    <h3>Where you'll be</h3>
+    <div  id="map">
 
+    </div>
+   </div>
+  
    </div>
     </div>
   </div>
 </body>
+
+<script src="/script/map.js"></script>

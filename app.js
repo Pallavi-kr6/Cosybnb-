@@ -22,8 +22,8 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const localStrategy = require("passport-local");
 const User = require("./models/user.js");
-const multer  = require('multer')
-const upload = multer({ dest: 'uploads/' })
+// const multer  = require('multer')
+// const upload = multer({ dest: 'uploads/' })
 
 
 //requiring express sessions

@@ -17,6 +17,9 @@ router
     validateListing,
     wrapAsync(ListingController.CreatedListing)
   );
+  // .post(upload.single("listing[image]"),(req,res)=>{
+  //   res.send(req.file);
+  // })
 
 //CREATE NEW ROUTE
 router.get('/new' ,isLoggedIn,ListingController.renderNewForm)
@@ -24,7 +27,7 @@ router.get('/new' ,isLoggedIn,ListingController.renderNewForm)
 router
  .route("/:id")
   .get( wrapAsync(ListingController.ShowListing ))
-  .put(isLoggedIn ,isOwner, validateListing, wrapAsync(ListingController.UpdateListing ))
+  .put(isLoggedIn ,isOwner,  upload.single("listing[image]"),validateListing, wrapAsync(ListingController.UpdateListing ))
   .delete(isLoggedIn, isOwner, wrapAsync(ListingController.destroyListing));
 
 //edit route
