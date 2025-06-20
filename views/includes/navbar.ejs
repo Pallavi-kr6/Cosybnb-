@@ -1,36 +1,96 @@
-<nav class="navbar navbar-expand-md navbar-light bg-light   border-bottom sticky-top">
-  <a class="navbar-brand m-3" href="#">
- <i class="fa-solid fa-compass-drafting "></i> Cosybnb
-</a>
+<style>
+  .navbar-brand i {
+    color: #e63946;
+    margin-right: 6px;
+  }
 
+  .form-inline {
+    display: flex;
+    gap: 0.5rem;
+  }
 
-  <!-- Fixed Bootstrap 5 attributes -->
-  <button class="navbar-toggler" type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  .search-bar {
+    width: 100%;
+    max-width: 500px;
+  }
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav me-auto">
-      <li class="nav-item active">
-        <a class="nav-link m-3" href="/listings">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link m-3" href="/listings/new">Add New Listing</a>
-      </li>
-    </ul>
-  </div>
-  <div class="navbar-nav">
-    <% if(!currentUser) {%>
-    <a class="nav-link" href="/signup" >Sign up</a>
-    <a class="nav-link" href="/login">log in</a>
-    <%}%>
-    <% if(currentUser) {%>
-    <a class="nav-link" href="/logout">Log out</a>
-    <%}%>
+  @media (max-width: 768px) {
+    .form-inline {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .search-bar {
+      margin-top: 1rem;
+      width: 100%;
+    }
+  }
+
+  .btn-search{
+  border-radius: 25px;
+     padding: 0 1em 0 1rem;
+    background-color: #e63946;
+    color: #fff;
+  }
+  .btn-search:hover{
+    background-color: #a8010f;
+     color: #fff;
+   
+  }
+
+  .btn-search i{
+    display: inline;
+    margin-right: 0.5rem;
+  }
+  .search-inp{
+    border-radius: 25px;
+  }
+</style>
+
+<nav class="navbar navbar-expand-md navbar-light bg-light border-bottom sticky-top">
+  <div class="container-fluid d-flex justify-content-between align-items-center flex-wrap">
+
+    <!-- Left Section: Brand + Home -->
+    <div class="d-flex align-items-center">
+      <a class="navbar-brand" href="#">
+        <i class="fa-solid fa-compass-drafting"></i> <strong>Cosybnb</strong>
+      </a>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" href="/listings">Home</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Center Section: Search Bar -->
+    <div class="search-bar my-2 mx-auto">
+      <form class="form-inline d-flex" role="search" action="/listings" method="GET">
+      <input name="search" class="search-inp form-control me-2" type="search" placeholder="Search Destinations" value="<%= typeof search !== 'undefined' ? search : '' %>" aria-label="Search">
+
+       
+        <button class="btn btn-search" type="submit"> <i class="fa fa-solid fa-magnifying-glass"></i>Search</button>
+      </form>
+    </div>
+
+    <!-- Right Section: Auth/User Links -->
+    <div class="navbar-nav">
+      <a class="nav-link" href="/listings/new">Add New Listing</a>
+      <% if (!currentUser) { %>
+        <a class="nav-link" href="/signup"><b>Sign up</b></a>
+        <a class="nav-link" href="/login"><b>Log in</b></a>
+      <% } %>
+      <% if (currentUser) { %>
+        <a class="nav-link" href="/logout"><b>Log out</b></a>
+      <% } %>
+    </div>
+
+    <!-- Toggler for Mobile -->
+    <button class="navbar-toggler" type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
   </div>
 </nav>

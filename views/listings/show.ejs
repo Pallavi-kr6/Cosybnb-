@@ -2,6 +2,7 @@
 <% layout('/layouts/boilerplate') %>
 <script>
    const mapToken = "<%=process.env.MAP_TOKEN %>";
+   const coordinates = <%-JSON.stringify(listing.geometry.coordinates)%>;
 </script>
 <body class="bg-light">
   <div class="container py-5">

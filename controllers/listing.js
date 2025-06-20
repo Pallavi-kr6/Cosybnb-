@@ -7,11 +7,19 @@ const geocodingClient = mbxGeocoding({ accessToken:mapToken});
 
 
 module.exports.index = async (req, res) => {
-  console.log("🔥 /listings route hit");
-  const listings = await Listing.find({});
-  
-  res.render("listings/index", { listings });
+  const { search } = req.query;
+  let listings;
+
+  if (search) {
+    const regex = new RegExp(search, 'i'); // 'i' = case-insensitive
+    listings = await Listing.find({ title: regex });
+  } else {
+    listings = await Listing.find({});
+  }
+
+  res.render("listings/index", { listings, search });
 };
+
 
 module.exports.renderNewForm = (req,res)=>{
     res.render("listings/new");
@@ -79,22 +87,45 @@ module.exports.destroyListing = async (req, res) => {
 }
 
 
-module.exports.CreatedListing=async (req, res, next) => {
-    let url=req.file.path;
-    let filename=req.file.filename;
-    const { listing } = req.body;
+module.exports.CreatedListing = async (req, res, next) => {
+    try {
+        const geoResponse = await geocodingClient.forwardGeocode({
+            query: req.body.listing.location,
+            limit: 1
+        }).send();
 
-    if (!listing.image || !listing.image.url || listing.image.url.trim() === "") {
-        listing.image = {
-            filename: "default.jpg",
-            url: "https://plus.unsplash.com/premium_photo-1748960861503-99b1f5412a81?q=80&w=1970&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        };
+        const features = geoResponse.body.features;
+
+        if (!features || features.length === 0) {
+            req.flash("error", "Could not find location. Please enter a valid location.");
+            return res.redirect("back");
+        }
+
+        const geometry = features[0].geometry;
+
+        let url = req.file?.path;
+        let filename = req.file?.filename;
+        const { listing } = req.body;
+
+        // fallback image
+        if (!listing.image || !listing.image.url || listing.image.url.trim() === "") {
+            listing.image = {
+                filename: "default.jpg",
+                url: "https://plus.unsplash.com/premium_photo-1748960861503-99b1f5412a81?q=80&w=1970&auto=format&fit=crop"
+            };
+        }
+
+        const newListing = new Listing(listing);
+        newListing.owner = req.user._id;
+        newListing.image = { url, filename };
+        newListing.geometry = geometry;
+
+        await newListing.save();
+        req.flash("success", "New Listing Created!");
+        res.redirect("/");
+    } catch (err) {
+        console.error("Error creating listing:", err);
+        req.flash("error", "Something went wrong while creating the listing.");
+        res.redirect("back");
     }
-
-    const newListing = new Listing(listing);
-    newListing.owner =req.user._id;
-   newListing.image = { url, filename }; 
-    await newListing.save();
-    req.flash("success","New Listing Created!");
-    res.redirect("/");
-}
+};
