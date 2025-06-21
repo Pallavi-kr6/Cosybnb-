@@ -31,9 +31,21 @@
       </div>
 
        <div class="mb-3">
-        <label for="img" class="form-label">Upload Image</label>
-        <input name="listing[image]" type="file" placeholder="URL" class="form-control" required/>
-      </div>
+       <div class="mb-3 flex">
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="listing[category]" id="iconicCities" value="Iconic Cities" checked>
+    <label class="form-check-label" for="iconicCities">Iconic Cities</label>
+    <br>
+    <input class="form-check-input" type="radio" name="listing[category]" id="mountains" value="Mountains">
+    <label class="form-check-label" for="mountains">Mountains</label>
+    <br>
+    <input class="form-check-input" type="radio" name="listing[category]" id="castles" value="Castles">
+    <label class="form-check-label" for="castles">Castles</label>
+    <br>
+    <input class="form-check-input" type="radio" name="listing[category]" id="arctic" value="Arctic">
+    <label class="form-check-label" for="arctic">Arctic</label>
+  </div>
+</div>
 
       <button type="submit" class="btn btn-primary">Create Listing</button>
     </div>
