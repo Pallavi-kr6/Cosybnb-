@@ -1,15 +1,16 @@
-<% layout('/layouts/boilerplate') %>
+<% layout('/layouts/auth_layout') %>
+
 
 <div class="row justify-content-center align-items-center min-vh-100" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
-    <div class="col-md-6 col-lg-5">
+    <div class="col-md-5 col-lg-4">
         <div class="card shadow-lg border-0 rounded-4">
-            <div class="card-body p-5">
-                <div class="text-center mb-4">
+            <div class="card-body ">
+                <div class="text-center ">
                     <img src="https://img.icons8.com/color/96/000000/beach.png" alt="Travel Icon" style="width:64px;">
-                    <h2 class="fw-bold mt-3" style="color: #2d6a4f;">Sign Up for Cosybnb</h2>
+                    <h2 class="fw-bold " style="color: #2d6a4f;">Sign Up for Cosybnb</h2>
                     <p class="text-muted">Join the adventure. Discover your next destination!</p>
                 </div>
-                <form action="/signup" method="POST" class="needs-validation" novalidate>
+                <form action="/signup" method="POST" class="needs-validation p-5" novalidate>
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
                         <input

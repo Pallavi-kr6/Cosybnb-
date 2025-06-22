@@ -56,6 +56,7 @@ module.exports.EditListing = async (req, res) => {
         req.flash("error", "Listing you requested does not exist");
         return res.redirect("/");
     }
+    
     let originalImageUrl = listing.image.url;
     originalImageUrl.replace("/upload","/upload/w_250");
     res.render("listings/edit", { listing }); 
@@ -63,19 +64,42 @@ module.exports.EditListing = async (req, res) => {
 
 module.exports.UpdateListing = async (req, res) => {
     const { id } = req.params;
-    const { listing } = req.body;
-    const updatedListing = await Listing.findByIdAndUpdate(id, listing, {
-        new: true,
-        runValidators: true
-    });
-    if(typeof req.file!=="undefined"){
-   let url=req.file.path;
-    let filename=req.file.filename;
-    listing.image = {url,filename};
+
+    const listing = await Listing.findById(id);
+    if (!listing) {
+        req.flash("error", "Listing not found");
+        return res.redirect("/");
     }
-     req.flash("success","Listing Edited!");
-    res.redirect(`/listings/${updatedListing._id}`);
-}
+
+    // Update text fields
+    const { title, description, price, country, location, category } = req.body.listing;
+    listing.title = title;
+    listing.description = description;
+    listing.price = price;
+    listing.country = country;
+    listing.location = location;
+    listing.category = category;
+
+    // 🔁 Geocode the new location
+    const geoResponse = await geocodingClient.forwardGeocode({
+        query: location,
+        limit: 1
+    }).send();
+
+    listing.geometry = geoResponse.body.features[0].geometry;
+
+    // 📷 Handle new image upload (if any)
+    if (req.file) {
+        listing.image = {
+            url: req.file.path,
+            filename: req.file.filename
+        };
+    }
+
+    await listing.save();
+    req.flash("success", "Listing Edited!");
+    res.redirect(`/listings/${listing._id}`);
+};
 
 module.exports.destroyListing = async (req, res) => {
   console.log("Delete route hit for ID:", req.params.id);

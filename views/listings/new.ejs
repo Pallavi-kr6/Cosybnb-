@@ -30,9 +30,13 @@
         <input name="listing[location]" type="text" placeholder="Location" class="form-control" required />
       </div>
 
+  
        <div class="mb-3">
        <div class="mb-3 flex">
   <div class="form-check">
+     <input class="form-check-input" type="radio" name="listing[category]" id="Rooms" value="Rooms" checked>
+    <label class="form-check-label" for="iconicCities">Rooms</label>
+    <br>
     <input class="form-check-input" type="radio" name="listing[category]" id="iconicCities" value="Iconic Cities" checked>
     <label class="form-check-label" for="iconicCities">Iconic Cities</label>
     <br>
@@ -44,8 +48,23 @@
     <br>
     <input class="form-check-input" type="radio" name="listing[category]" id="arctic" value="Arctic">
     <label class="form-check-label" for="arctic">Arctic</label>
+    <br>
+      <input class="form-check-input" type="radio" name="listing[category]" id="SwimmingPool" value="Swimming Pool">
+    <label class="form-check-label" for="Swimming Pool">
+  Swimming Pool</label>
+  <br>
+   <input class="form-check-input" type="radio" name="listing[category]" id="Tents" value="Tents">
+    <label class="form-check-label" for="Tents">
+  Tents</label>
+  <br>
+   <input class="form-check-input" type="radio" name="listing[category]" id="Dome" value="Dome">
+    <label class="form-check-label" for="Dome">
+  Dome</label>
+  </div>
   </div>
 </div>
+
+
 
       <button type="submit" class="btn btn-primary">Create Listing</button>
     </div>

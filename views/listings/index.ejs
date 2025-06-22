@@ -1,41 +1,6 @@
-<% layout('/layouts/boilerplate') %> 
+<% layout('/layouts/boilerplate') %>
 
-<style>
-  #filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    margin-bottom: 2rem;
-  }
-  .filter {
-    text-align: center;
-    margin-top: 2rem;
-  
-    margin-right: 0;
-    opacity: 0.7;
-    min-width: 100px;
-  }
-  .filter:hover {
-    opacity: 1;
-    cursor: pointer;
-  }
 
-  .tax-info {
-    display: none;
-  }
-
-  .toggle {
-   
-  
-   border-radius:1rem;
-    border: 2px solid hsl(0, 2%, 53%);
-   width: 12rem;
-    height: 2rem;
-    
-   
-
-  }
-</style>
 
 <body>
   <div class="container">
@@ -46,46 +11,53 @@
 
     <!-- Filters Section -->
     <div class="collapse d-lg-block" id="filtersCollapse">
-      <div id="filters" class="flex-wrap">
+      <div id="filters">
         <div class="filter">
-          <div><i class="fa-solid fa-fire"></i>
-           <a href="/listings?category=Trending"><p>Trending</p></a> 
-          </div>
+          <i class="fa-solid fa-fire" style="color: orangered;"></i>
+          <a href="/listings?category=Trending" style="text-decoration: none; color: black;"><p>Trending</p></a>
         </div>
         <div class="filter">
-          <div><i class="fa-solid fa-bed"></i>
-           <a href="/listings?category=Rooms"><p >Rooms</p></a> 
-          </div>
+          <i class="fa-solid fa-bed" style="color: #6c5ce7;"></i>
+          <a href="/listings?category=Rooms"  style="text-decoration: none; color: black;" ><p>Rooms</p></a>
         </div>
         <div class="filter">
-          <div><i class="fa-solid fa-mountain-city"></i>
-            <a  href="/listings?category=Iconic Cities"><p>Iconic Cities</p></a>
-          </div>
+          <i class="fa-solid fa-mountain-city"  style="color: #f39c12;"></i>
+          <a href="/listings?category=Iconic Cities"  style="text-decoration: none; color: black;" ><p>Iconic Cities</p></a>
         </div>
         <div class="filter">
-          <div><i class="fa-solid fa-mountain-sun"></i>
-           <a href="/listings?category=Mountains"><p >Mountains</p></a> 
-          </div>
+          <i class="fa-solid fa-mountain-sun" style="color:	#27ae60 ;"></i>
+          <a href="/listings?category=Mountains"  style="text-decoration: none; color: black;" ><p>Mountains</p></a>
         </div>
         <div class="filter">
-          <div><i class="fa-brands fa-fort-awesome"></i>
-           <a href="/listings?category=Castles"> <p >Castles</p></a>
-          </div>
+          <i class="fa-brands fa-fort-awesome" style="color: #d63031 ;"></i>
+          <a href="/listings?category=Castles"  style="text-decoration: none; color: black;" ><p>Castles</p></a>
         </div>
         <div class="filter">
-          <div><i class="fa-solid fa-snowflake"></i>
-            <a href="/listings?category=Arctic"><p >Arctic</p></a>
+          <i class="fa-solid fa-snowflake" style="color:#74b9ff ;"></i>
+          <a href="/listings?category=Arctic"  style="text-decoration: none; color: black;" ><p>Arctic</p></a>
+        </div>
+        <div class="filter">
+          <i class="fa-solid fa-person-swimming" style="color: #00cec9;"></i>
+          <a href="/listings?category=Swimming Pool"  style="text-decoration: none; color: black;" ><p>Swimming Pool</p></a>
+        </div>
+        <div class="filter">
+          <i class="fa-solid fa-tents" style="color: 	#fdcb6e ;"></i>
+          <a href="/listings?category=Tents"  style="text-decoration: none; color: black;" ><p>Tents</p></a>
+        </div>
+ <div class="filter">
+        <i class="fa-solid fa-igloo" style="color: #74b9ff;"></i>
+ <a href="/listings?category=Dome"  style="text-decoration: none; color: black;" ><p>Dome</p></a>
+        </div>
+        <!-- GST Toggle Switch inside filters -->
+        <div class="filter">
+          <div class="form-check-reverse form-switch toggle">
+             <label class="form-check-label" for="flexSwitchCheckDefault">Include GST Info</label>
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+           
           </div>
         </div>
-        
-    <!-- GST Toggle Switch -->
-    <div class="form-check-reverse form-switch m-5 toggle">
-      <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-        <label class="form-check-label" for="flexSwitchCheckDefault">Include GST Info</label>
-    </div>
       </div>
     </div>
-
 
     <!-- Listings Grid -->
     <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
@@ -95,10 +67,11 @@
             <img class="card-img-top" src="<%= listing.image.url %>" alt="Card image cap" style="height: 20rem;">
             <div class="card-img-overlay"></div>
             <div class="card-body">
-              <b><p class="card-text"><%= listing.title %></b>
-                <br>
-                ₹<%= listing.price.toLocaleString("en-IN") %> /night
-                <span class="tax-info">+18% GST</span>
+              <b><p class="card-text"><%= listing.title %>
+              </b>
+              <br>
+              ₹<%= listing.price.toLocaleString("en-IN") %> /night
+              <span class="tax-info">+18% GST</span>
               </p>
             </div>
           </div>
